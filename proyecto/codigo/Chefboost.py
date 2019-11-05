@@ -8,7 +8,13 @@ import pickle
 from commons import functions
 from training import Preprocess, Training
 from tuning import gbm, adaboost, randomforest
-
+ 
+#Title:<Github.com>
+#Author:serengil
+#Date:<2019>
+#Code Version: 27 Sept 2019
+#Availability:https://github.com/serengil/chefboost
+    
 #------------------------
 
 def fit(df, config):
