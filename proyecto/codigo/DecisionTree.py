@@ -9,22 +9,22 @@ df.columns = ['ph', 'soil_temperature', 'soil_moisture', 'illuminance', 'env_tem
 # print(df.head(10)) #UNCOMMENT IF WANT FIRST 10 ROWS PRINTED OUT
 
 
-config = {'algorithm':'ID3'} # CONFIGURE THE ALGORITH. CHOOSE BETWEEN ID3, C4.5, CART, Regression
-model = chef.fit(df.copy(), config) #CREATE THE DECISION TREE BASED OF THE CONFIGURATION ABOVE
+#config = {'algorithm':'C4.5'} # CONFIGURE THE ALGORITH. CHOOSE BETWEEN ID3, C4.5, CART, Regression
+#model = chef.fit(df.copy(), config) #CREATE THE DECISION TREE BASED OF THE CONFIGURATION ABOVE
+config = {'enableRandomForest': True, 'num_of_trees':5}
+model = chef.fit(df, config)
 
 resultados = pd.DataFrame(columns = ["Real", "Predicción"]) #CREATE AN EMPTY PANDAS DATAFRAME
-# SAVE ALL REAL VS ESTIMATED VALUES IN THE ABOVE DATAFRAME
-for i in range(1,372):
+#SAVE ALL REAL VS ESTIMATED VALUES IN THE ABOVE DATAFRAME
+for i in range(300):
     l = []
-    l.append(df.iloc[i]['Decision'])
     feature = df.iloc[i]
     prediction = chef.predict(model, feature)
     l.append(prediction)
     resultados.loc[i] = l
     print(l)
-   
 
-# ASK THE USER FOR A NEW RECORD
+ASK THE USER FOR A NEW RECORD
 nuevo = input("INSERT NEW RECORD AS A LIST:\n")
 feature = eval(nuevo)
 prediction = chef.predict(model, feature)
